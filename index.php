@@ -22,6 +22,7 @@ function normalEmail($email)
 
 if ($file !== false) {
   $data = json_decode($file, true);
+  $updated_at = $data['updated_at'];
   $total = count($data['list']);
 
   $email = '';
@@ -97,7 +98,7 @@ if ($file !== false) {
       } else {
         ?>
         <p>
-          <?= $int->msg('total-requests', ['variables' => [$total]]) ?>
+          <?= $int->msg('total-requests', ['variables' => [$total, $updated_at]]) ?>
         </p>
         <h3 class="mt-5">
           <?= $int->msg('check-your-request') ?>
