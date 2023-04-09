@@ -1,0 +1,10 @@
+{
+  "name": "unblock-zh-status-web",
+  "version": "1.0.0",
+  "scripts": {
+    "i18n": "python3 ./node_modules/mediawiki-gadget-i18n-helper/i18n.py --mode=i18n i18n/zh-hant.json i18n/zh-hans.json"
+  },
+  "devDependencies": {
+    "mediawiki-gadget-i18n-helper": "github:xiplus-mediawiki-programs/mediawiki-gadget-i18n-helper"
+  }
+}

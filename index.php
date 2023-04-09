@@ -1,0 +1,150 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$int = new Krinkle\Intuition\Intuition([
+  'domain' => 'unblock-zh-status-web',
+]);
+
+if (isset($_GET['userlang'])) {
+  $int->setCookie('userlang', $_GET['userlang']);
+}
+
+$int->registerDomain('unblock-zh-status-web', __DIR__ . '/i18n');
+
+// read json
+$file = @file_get_contents(__DIR__ . '/latest_time.json');
+$total = -1;
+
+function normalEmail($email)
+{
+  return strtolower(trim($email));
+}
+
+if ($file !== false) {
+  $data = json_decode($file, true);
+  $total = count($data['list']);
+
+  $email = '';
+  if (isset($_POST['email'])) {
+    $email = normalEmail($_POST['email']);
+
+    $order = -1;
+    $request_time = '';
+    foreach ($data['list'] as $index => $value) {
+      if ($email === normalEmail($value[0])) {
+        $order = $index + 1;
+        $request_time = $value[1];
+        break;
+      }
+    }
+  }
+}
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    <?= $int->msg('title') ?>
+  </title>
+  <link href="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand">
+          <?= $int->msg('header') ?>
+        </a>
+        <form class="d-flex" role="search">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
+                <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z" />
+                <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z" />
+              </svg>
+              <?= $int->getLangName() ?>
+            </button>
+            <ul class="dropdown-menu">
+              <?php
+              foreach ($int->getAvailableLangs() as $langCode => $langName) {
+                ?>
+                <li><a class="dropdown-item" href="?userlang=<?= $langCode ?>"><?= $langName ?></a></li>
+                <?php
+              }
+              ?>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-shrink-0">
+    <div class="container">
+      <p>
+        <?= $int->msg('total-requests', ['variables' => [$total]]) ?>
+      </p>
+      <h3 class="mt-5">
+        <?= $int->msg('check-your-request') ?>
+      </h3>
+      <form action="" method="post">
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">
+            <?= $int->msg('email-address') ?>
+          </label>
+          <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" value="<?= $email ?>">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary mb-3">
+            <?= $int->msg('check') ?>
+          </button>
+        </div>
+      </form>
+      <p>
+        <?php if ($email) {
+          if ($order === -1) {
+            ?>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">
+              <?= $int->msg('request-not-received') ?>
+            </h4>
+            <p>
+              <?= $int->msg('possible-reason') ?>
+              <ul>
+                <li><?= $int->msg('not-updated')?></li>
+                <li><?= $int->msg('mail-holded')?></li>
+                <li><?= $int->msg('wrong-email')?></li>
+              </ul>
+            </p>
+          </div>
+          <?php
+          } else {
+            ?>
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">
+              <?= $int->msg('request-received') ?>
+            </h4>
+            <p>
+              <?= $int->msg('request-received-detail', ['variables' => [$request_time, $order]]) ?>
+            </p>
+            <hr>
+            <p>
+              <?= $int->msg('do-not-resend') ?>
+            </p>
+          </div>
+          <?php
+          }
+        }
+        ?>
+      </p>
+    </div>
+  </main>
+
+  <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
