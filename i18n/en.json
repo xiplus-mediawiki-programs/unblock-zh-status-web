@@ -1,6 +1,7 @@
 {
 	"title": "unblock-zh status",
 	"header": "unblock-zh status",
+	"status-missing": "Failed to fetch status. Please try later.",
 	"total-requests": "There are currently <b>$1</b> requests in the queue.",
 	"check-your-request": "Check your request",
 	"email-address": "Email address",

@@ -85,62 +85,82 @@ if ($file !== false) {
 
   <main class="flex-shrink-0">
     <div class="container">
-      <p>
-        <?= $int->msg('total-requests', ['variables' => [$total]]) ?>
-      </p>
-      <h3 class="mt-5">
-        <?= $int->msg('check-your-request') ?>
-      </h3>
-      <form action="" method="post">
-        <div class="mb-3">
-          <label for="inputEmail" class="form-label">
-            <?= $int->msg('email-address') ?>
-          </label>
-          <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" value="<?= $email ?>">
-        </div>
-        <div>
-          <button type="submit" class="btn btn-primary mb-3">
-            <?= $int->msg('check') ?>
-          </button>
-        </div>
-      </form>
-      <p>
-        <?php if ($email) {
-          if ($order === -1) {
-            ?>
-          <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">
-              <?= $int->msg('request-not-received') ?>
-            </h4>
-            <p>
-              <?= $int->msg('possible-reason') ?>
-              <ul>
-                <li><?= $int->msg('not-updated')?></li>
-                <li><?= $int->msg('mail-holded')?></li>
-                <li><?= $int->msg('wrong-email')?></li>
-              </ul>
-            </p>
-          </div>
-          <?php
-          } else {
-            ?>
-          <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">
-              <?= $int->msg('request-received') ?>
-            </h4>
-            <p>
-              <?= $int->msg('request-received-detail', ['variables' => [$request_time, $order]]) ?>
-            </p>
-            <hr>
-            <p>
-              <?= $int->msg('do-not-resend') ?>
-            </p>
-          </div>
-          <?php
-          }
-        }
+      <?php
+      if ($total === -1) {
         ?>
-      </p>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">
+            <?= $int->msg('status-missing') ?>
+          </h4>
+        </div>
+        <?php
+      } else {
+        ?>
+        <p>
+          <?= $int->msg('total-requests', ['variables' => [$total]]) ?>
+        </p>
+        <h3 class="mt-5">
+          <?= $int->msg('check-your-request') ?>
+        </h3>
+        <form action="" method="post">
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">
+              <?= $int->msg('email-address') ?>
+            </label>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" value="<?= $email ?>">
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary mb-3">
+              <?= $int->msg('check') ?>
+            </button>
+          </div>
+        </form>
+        <p>
+          <?php if ($email) {
+            if ($order === -1) {
+              ?>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">
+                <?= $int->msg('request-not-received') ?>
+              </h4>
+              <p>
+                <?= $int->msg('possible-reason') ?>
+              <ul>
+                <li>
+                  <?= $int->msg('not-updated') ?>
+                </li>
+                <li>
+                  <?= $int->msg('mail-holded') ?>
+                </li>
+                <li>
+                  <?= $int->msg('wrong-email') ?>
+                </li>
+              </ul>
+              </p>
+            </div>
+            <?php
+            } else {
+              ?>
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">
+                <?= $int->msg('request-received') ?>
+              </h4>
+              <p>
+                <?= $int->msg('request-received-detail', ['variables' => [$request_time, $order]]) ?>
+              </p>
+              <hr>
+              <p>
+                <?= $int->msg('do-not-resend') ?>
+              </p>
+            </div>
+            <?php
+            }
+          }
+          ?>
+        </p>
+        <?php
+      }
+      ?>
     </div>
   </main>
 
