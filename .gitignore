@@ -1,3 +1,4 @@
 node_modules/
 vendor/
 latest_time.json
+log.csv

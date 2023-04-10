@@ -38,6 +38,7 @@ if ($file !== false) {
         break;
       }
     }
+    file_put_contents(__DIR__ . '/log.csv', sprintf('%s,%s,%s,%d,%s', date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $email, $order, $request_time) . PHP_EOL, FILE_APPEND);
   }
 }
 ?>
