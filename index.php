@@ -28,7 +28,8 @@ if ($file !== false) {
   $email = '';
   if (isset($_POST['email'])) {
     $email = normalEmail($_POST['email']);
-
+  }
+  if ($email) {
     $order = -1;
     $request_time = '';
     foreach ($data['list'] as $index => $value) {
@@ -109,7 +110,7 @@ if ($file !== false) {
             <label for="inputEmail" class="form-label">
               <?= $int->msg('email-address') ?>
             </label>
-            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" value="<?= $email ?>">
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" required value="<?= $email ?>">
           </div>
           <div>
             <button type="submit" class="btn btn-primary mb-3">
