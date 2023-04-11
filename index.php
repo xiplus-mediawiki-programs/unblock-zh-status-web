@@ -41,7 +41,7 @@ if ($file !== false) {
     }
     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
     $ua = $_SERVER['HTTP_USER_AGENT'];
-    file_put_contents(__DIR__ . '/log.csv', sprintf('%s,%s,%d,%s,%s,%s', date('Y-m-d H:i:s'), $email, $order, $request_time, $ip, $ua) . PHP_EOL, FILE_APPEND);
+    file_put_contents(__DIR__ . '/log.csv', sprintf('%s,%s,%d,%s,%s,"%s"', date('Y-m-d H:i:s'), $email, $order, $request_time, $ip, $ua) . PHP_EOL, FILE_APPEND);
   }
 }
 ?>
