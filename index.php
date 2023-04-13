@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
+const BACKLOG_COUNT = 10;
+
 $int = new Krinkle\Intuition\Intuition([
   'domain' => 'unblock-zh-status-web',
 ]);
@@ -24,6 +26,13 @@ if ($file !== false) {
   $data = json_decode($file, true);
   $updated_at = $data['updated_at'];
   $total = count($data['list']);
+
+  $duration_sum = 0;
+  for ($i = 0; $i < min(BACKLOG_COUNT, $total); $i++) {
+    $duration_sum += time() - strtotime($data['list'][$i][1]);
+  }
+  $duration_sum /= BACKLOG_COUNT;
+  $backlog_str = date('Y-m-d H:i:s', time() - $duration_sum);
 
   $email = '';
   if (isset($_POST['email'])) {
@@ -170,6 +179,21 @@ if ($file !== false) {
   </main>
 
   <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var backlog_str = '<?= $backlog_str ?>';
+    var backlog = new Date(backlog_str);
+    function updateTime() {
+      var duration = (new Date() - backlog) / 1000;
+      var day = Math.floor(duration / 86400);
+      var hour = (Math.floor(duration / 3600) % 24).toString().padStart(2, '0');
+      var minute = (Math.floor(duration / 60) % 60).toString().padStart(2, '0');
+      var second = (Math.floor(duration) % 60).toString().padStart(2, '0');
+      document.getElementById('dd').innerHTML = day;
+      document.getElementById('dt').innerHTML = hour + ':' + minute + ':' + second;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
 </body>
 
 </html>

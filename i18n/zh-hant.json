@@ -2,7 +2,7 @@
 	"title": "unblock-zh處理進度",
 	"header": "unblock-zh處理進度查詢",
 	"status-missing": "讀取狀態失敗，請稍後再試。",
-	"total-requests": "目前有<b>$1</b>個請求等待處理，更新時間為 <b>$2</b> (UTC+8)。",
+	"total-requests": "目前有 <b>$1</b> 個請求等待處理，積壓時間約為 <b><span id='dd'>0</span> 天 <span id='dt'>00:00:00</span></b>。更新時間為 <b>$2</b> (UTC+8)。",
 	"check-your-request": "檢查您的申請",
 	"email-address": "電子郵件地址",
 	"check": "檢查",
