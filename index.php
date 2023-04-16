@@ -149,6 +149,12 @@ if ($file !== false) {
                 <li>
                   <?= $int->msg('wrong-email') ?>
                 </li>
+                <li>
+                  <?= $int->msg('replied-mail') ?>
+                </li>
+                <li>
+                  <?= $int->msg('ignored-mail', ['variables' => ['https://zh.wikipedia.org/wiki/WP:IPBEMAIL']]) ?>
+                </li>
               </ul>
               </p>
             </div>
