@@ -121,7 +121,7 @@ if ($file !== false) {
             <label for="inputEmail" class="form-label">
               <?= $int->msg('email-address') ?>
             </label>
-            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" required value="<?= $email ?>">
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="name@example.com" autocomplete="email" required>
           </div>
           <div>
             <button type="submit" class="btn btn-primary mb-3">
@@ -135,7 +135,7 @@ if ($file !== false) {
               ?>
             <div class="alert alert-danger" role="alert">
               <h4 class="alert-heading">
-                <?= $int->msg('request-not-received') ?>
+                <?= $int->msg('request-not-received', ['variables' => [htmlentities($email)]]) ?>
               </h4>
               <p>
                 <?= $int->msg('possible-reason') ?>
@@ -157,7 +157,7 @@ if ($file !== false) {
               ?>
             <div class="alert alert-success" role="alert">
               <h4 class="alert-heading">
-                <?= $int->msg('request-received') ?>
+                <?= $int->msg('request-received', ['variables' => [htmlentities($email)]]) ?>
               </h4>
               <p>
                 <?= $int->msg('request-received-detail', ['variables' => [$request_time, $order]]) ?>

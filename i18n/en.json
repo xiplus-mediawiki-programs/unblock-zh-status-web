@@ -6,12 +6,12 @@
 	"check-your-request": "Check your request",
 	"email-address": "Email address",
 	"check": "Check",
-	"request-not-received": "We didn't receive your request",
+	"request-not-received": "We didn't receive your request ($1)",
 	"possible-reason": "Possible reasons:",
 	"not-updated": "You sent the email within the past 24 hours. The status have not been updated. Please check the status 24 hours later.",
 	"mail-holded": "You left the email subject blank or you attach images in the email. You email have been held for additional reviews. Your request is still valid. Do not resend the email. Please check the status 24-72 hours later.",
 	"wrong-email": "You have entered a wrong email address in the form.",
-	"request-received": "We have received your request",
+	"request-received": "We have received your request ($1)",
 	"request-received-detail": "We received your latest email at <b>$1</b>. Your order in the queue: <b>$2</b>. Please wait with patience.",
 	"do-not-resend": "Resending the email will reset your order. Please do not resend it unless there are mistakes in your request."
 }
