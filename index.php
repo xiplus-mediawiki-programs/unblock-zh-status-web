@@ -180,6 +180,10 @@ if ($file !== false) {
 
   <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
   <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+
     var backlog_str = '<?= $backlog_str ?>';
     var backlog = new Date(backlog_str);
     function updateTime() {
