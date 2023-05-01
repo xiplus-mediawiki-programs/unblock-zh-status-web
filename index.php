@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Taipei');
 require_once __DIR__ . '/vendor/autoload.php';
 
 const BACKLOG_COUNT = 10;
