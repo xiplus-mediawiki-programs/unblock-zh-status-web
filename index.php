@@ -23,8 +23,11 @@ function normalEmail($email)
   return strtolower(trim($email));
 }
 
+$data = null;
 if ($file !== false) {
   $data = json_decode($file, true);
+}
+if ($data !== null) {
   $updated_at = $data['updated_at'];
   $total = count($data['list']);
 
