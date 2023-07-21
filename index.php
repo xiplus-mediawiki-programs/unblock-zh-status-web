@@ -117,6 +117,9 @@ if ($data !== null) {
         <p>
           <?= $int->msg('total-requests', ['variables' => [$total, $updated_at]]) ?>
         </p>
+        <p>
+          2023-07-21 公告：之前無法查閱超過 14 天的申請，現已修正，顯示的順位可能會稍微延後，但<b>從未影響您申請的順序</b>。
+        </p>
         <h3 class="mt-5">
           <?= $int->msg('check-your-request') ?>
         </h3>
