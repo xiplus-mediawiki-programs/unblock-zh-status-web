@@ -1,6 +1,6 @@
 {
-	"title": "unblock-zh status",
-	"header": "unblock-zh status",
+	"title": "$1 status",
+	"header": "$1 status",
 	"status-missing": "Failed to fetch status. Please try later.",
 	"total-requests": "There are currently <b>$1</b> requests in the queue. The backlog is about <b><span id='dd'>0</span> days <span id='dt'>00:00:00</span></b>. Updated at <b>$2</b> (UTC+8).",
 	"check-your-request": "Check your request",

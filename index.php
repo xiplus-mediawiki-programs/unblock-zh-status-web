@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Taipei');
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config.php';
 
 const BACKLOG_COUNT = 10;
 
@@ -65,7 +66,7 @@ if ($data !== null) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
-    <?= $int->msg('title') ?>
+    <?= $int->msg('title', ['variables' => [SITE_NAME]]) ?>
   </title>
   <link href="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/css/bootstrap.css" rel="stylesheet">
 </head>
@@ -75,7 +76,7 @@ if ($data !== null) {
     <nav class="navbar bg-body-tertiary">
       <div class="container">
         <a class="navbar-brand">
-          <?= $int->msg('header') ?>
+          <?= $int->msg('header', ['variables' => [SITE_NAME]]) ?>
         </a>
         <form class="d-flex" role="search">
           <div class="dropdown">
