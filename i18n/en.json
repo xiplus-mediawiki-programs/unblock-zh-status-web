@@ -11,7 +11,7 @@
 	"not-updated": "You sent the email within the past 24 hours. The status have not been updated. Please check the status 24 hours later.",
 	"mail-holded": "You left the email subject blank or you attach images in the email. You email have been held for additional reviews. Your request is still valid. Do not resend the email. Please check the status 24-72 hours later.",
 	"wrong-email": "You have entered a wrong email address in the form.",
-	"replied-mail": "If you have receive any reply from administrators, your mail will not be listed here.",
+	"replied-mail": "If you have receive any reply from agents, your mail will not be listed here.",
 	"ignored-mail": "Your mail content is empty or nonsense. An administrator has ignored your message. Please follow our \"<a href='$1' target='_blank'>mail guide</a>\" then resend it.",
 	"request-received": "We have received your request ($1)",
 	"request-received-detail": "We received your latest email at <b>$1</b>. Your order in the queue: <b>$2</b>. Please wait with patience.",
