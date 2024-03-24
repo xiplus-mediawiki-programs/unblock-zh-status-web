@@ -33,10 +33,12 @@ if ($data !== null) {
   $total = count($data['list']);
 
   $duration_sum = 0;
+  $duration_cnt = 0;
   for ($i = 0; $i < min(BACKLOG_COUNT, $total); $i++) {
     $duration_sum += time() - strtotime($data['list'][$i][1]);
+    $duration_cnt++;
   }
-  $duration_sum /= BACKLOG_COUNT;
+  $duration_sum /= $duration_cnt;
   $backlog_str = date('Y-m-d H:i:s', time() - $duration_sum);
 
   $email = '';
