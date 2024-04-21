@@ -60,6 +60,8 @@ if ($data !== null) {
     file_put_contents(__DIR__ . '/log.csv', sprintf('%s,%s,%d,%s,%s,"%s"', date('Y-m-d H:i:s'), $email, $order, $request_time, $ip, $ua) . PHP_EOL, FILE_APPEND);
   }
 }
+
+$stats_str = json_encode($data['statistics']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -120,6 +122,7 @@ if ($data !== null) {
         <p>
           <?= $int->msg('total-requests', ['variables' => [$total, $updated_at]]) ?>
         </p>
+        <div style="height: 300px;"><canvas id="chart"></canvas></div>
         <h3 class="mt-5">
           <?= $int->msg('check-your-request') ?>
         </h3>
@@ -192,12 +195,15 @@ if ($data !== null) {
   </main>
 
   <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script>
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
 
     var backlog_str = '<?= $backlog_str ?>';
+    var stats_str = '<?= $stats_str ?>';
+    var stats = JSON.parse(stats_str);
     var backlog = new Date(backlog_str);
     function updateTime() {
       var duration = (new Date() - backlog) / 1000;
@@ -210,6 +216,31 @@ if ($data !== null) {
     }
     updateTime();
     setInterval(updateTime, 1000);
+
+    const ctx = document.getElementById('chart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: stats.map((item) => item.label),
+        datasets: [{
+          label: '已處理',
+          data: stats.map((item) => item.done),
+        }, {
+          label: '未處理',
+          data: stats.map((item) => item.new),
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true
+          }
+        }
+      }
+    });
   </script>
 </body>
 
