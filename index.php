@@ -72,7 +72,7 @@ $stats_str = json_encode($data['statistics']);
   <title>
     <?= $int->msg('title', ['variables' => [SITE_NAME]]) ?>
   </title>
-  <link href="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/css/bootstrap.css" rel="stylesheet">
+  <link href="static/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
@@ -194,8 +194,8 @@ $stats_str = json_encode($data['statistics']);
     </div>
   </main>
 
-  <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-  <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="static/bootstrap.bundle.min.js"></script>
+  <script src="static/chart.umd.js"></script>
   <script>
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
